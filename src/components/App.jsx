@@ -1,32 +1,25 @@
-import { Routes, Route, NavLink } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import { Cast } from './Cast/Cast';
-import { Home } from './Home/Home';
-import { MovieDetails } from './MovieDetails/MovieDetails';
-import { Movies } from './Movies/Movies';
-import { Reviews } from './Reviews/Reviews';
+import { Cast } from 'pages/Cast';
+import { Home } from 'pages/Home';
+import { MovieDetails } from 'pages/MovieDetails';
+import { Movies } from 'pages/Movies';
+import { Reviews } from 'pages/Reviews';
+import { Routes, Route } from 'react-router-dom';
+import { NotFound } from './NotFound/NotFound';
+import { SharedLayout } from './SharedLayout/SharedLayout';
 
 export const App = () => {
   return (
-    <div>
-      <nav>
-        <NavLink to="/home" end>
-          Home
-        </NavLink>
-        <NavLink to="/movies" end>
-          Movies
-        </NavLink>
-      </nav>
-
-      <Routes>
-        <Route path="/cast" element={<Cast />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/movieDetails/:movieId" element={<MovieDetails />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/reviews/:movieId" element={<Reviews />} />
-        {/* <Route path="*" element={<NotFound />} /> */}
-      </Routes>
-      <ToastContainer />
-    </div>
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/movies" element={<Movies />}>
+          <Route path="movies/:id" element={<MovieDetails />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 };
