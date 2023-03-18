@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { CastListStyled } from './CastListStyled';
 
 export const CastList = ({ cast }) => {
@@ -31,4 +32,15 @@ export const CastList = ({ cast }) => {
       </CastListStyled>
     </>
   );
+};
+
+CastList.propTypes = {
+  cast: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      profile_path: PropTypes.string.isRequired,
+      original_name: PropTypes.string.isRequired,
+      character: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
 };

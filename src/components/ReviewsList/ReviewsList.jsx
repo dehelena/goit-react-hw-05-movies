@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ReviewsListStyled } from './ReviewsListStyled';
 
 export const ReviewsList = ({ reviews }) => {
@@ -18,4 +19,14 @@ export const ReviewsList = ({ reviews }) => {
       </ReviewsListStyled>
     </>
   );
+};
+
+ReviewsList.propTypes = {
+  reviews: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      author: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
 };
