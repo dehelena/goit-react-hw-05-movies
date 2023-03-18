@@ -6,7 +6,7 @@ import BackLink from 'components/BackLink/BackLink';
 
 const MovieDetails = () => {
   const { id } = useParams(); // деструктуризація 'id' береться з App шляху до динамічного елементу
-  const [movie, setMovie] = useState('');
+  const [movie, setMovie] = useState({});
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/movies';
 
