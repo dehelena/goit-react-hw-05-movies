@@ -1,18 +1,21 @@
 import React from 'react';
+import { ReviewsListStyled } from './ReviewsListStyled';
 
 export const ReviewsList = ({ reviews }) => {
   return (
     <>
-      <ul>
+      <ReviewsListStyled>
         {reviews.map(({ id, author, content }) => {
           return (
             <li key={id}>
-              <p>Author: {author}</p>
+              <p className="author">
+                <b>Author: {author}</b>
+              </p>
               <p>{content}</p>
             </li>
           );
         })}
-      </ul>
+      </ReviewsListStyled>
     </>
   );
 };

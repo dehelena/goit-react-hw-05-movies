@@ -4,14 +4,15 @@ import React, { useState, useEffect } from 'react';
 import { requestMoviesBySearch } from 'components/services/MoviesAPI';
 import { useSearchParams } from 'react-router-dom';
 
-export const Movies = () => {
+const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query'); //отримуємо конкретне значення з параметру пошуку за ключовим словом
+  // console.log(query);
 
   useEffect(() => {
-    const query = searchParams.get('query');
-    // console.log('query: ', query);
     if (!query) return;
+
     const fetchSearchedMovies = async query => {
       try {
         const { results } = await requestMoviesBySearch(query);
@@ -21,7 +22,7 @@ export const Movies = () => {
       }
     };
     fetchSearchedMovies(query);
-  }, [searchParams]);
+  }, [query]);
 
   const handleSearchbarSubmit = query => {
     setSearchParams({ query });
@@ -34,3 +35,5 @@ export const Movies = () => {
     </div>
   );
 };
+
+export default Movies;

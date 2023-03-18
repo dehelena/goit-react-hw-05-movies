@@ -1,4 +1,5 @@
 import React from 'react';
+import { CastListStyled } from './CastListStyled';
 
 export const CastList = ({ cast }) => {
   const defaultImg =
@@ -6,7 +7,7 @@ export const CastList = ({ cast }) => {
 
   return (
     <>
-      <ul>
+      <CastListStyled>
         {cast.map(({ id, profile_path, original_name, character }) => {
           return (
             <li key={id}>
@@ -17,14 +18,17 @@ export const CastList = ({ cast }) => {
                     : defaultImg
                 }
                 alt={original_name}
-                width="200"
               />
-              <b>{original_name}</b>
-              {character ? <p>Character: {character} </p> : ''}
+              <div>
+                <p>
+                  <b>{original_name}</b>
+                </p>
+                {character ? <p>Character: {character} </p> : ''}
+              </div>
             </li>
           );
         })}
-      </ul>
+      </CastListStyled>
     </>
   );
 };

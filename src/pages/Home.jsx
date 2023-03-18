@@ -4,14 +4,13 @@ import { requestTrending } from 'components/services/MoviesAPI';
 
 // import { useParams } from 'react-router-dom';
 
-export const Home = () => {
+const Home = () => {
   const [trendMovies, setTrendMovies] = useState([]);
 
   useEffect(() => {
     const fetchTrendMovies = async () => {
       try {
         const { results } = await requestTrending();
-        // console.log(results);
         setTrendMovies(results);
       } catch (error) {
         console.log(error);
@@ -22,8 +21,10 @@ export const Home = () => {
 
   return (
     <main>
-      <h1>Trending movies for this week</h1>
+      <h1>Trending today</h1>
       {trendMovies.length > 0 && <MoviesList movies={trendMovies} />}
     </main>
   );
 };
+
+export default Home;

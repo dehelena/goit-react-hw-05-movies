@@ -3,11 +3,13 @@ import { requestMovieReviews } from 'components/services/MoviesAPI';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
+    if (!id) return;
+
     const fetchMovieReviews = async id => {
       try {
         const { results } = await requestMovieReviews(id);
@@ -21,7 +23,7 @@ export const Reviews = () => {
 
   return (
     <div>
-      {reviews ? (
+      {reviews.length > 0 ? (
         <ReviewsList reviews={reviews} />
       ) : (
         <p>No reviews for this film</p>
@@ -29,3 +31,5 @@ export const Reviews = () => {
     </div>
   );
 };
+
+export default Reviews;

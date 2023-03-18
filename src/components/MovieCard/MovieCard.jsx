@@ -1,48 +1,62 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { AddInfoStyled, MovieCardStyled } from './MovieCardStyled';
 
-export const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie }) => {
   const { title, poster_path, genres, release_date, overview, vote_average } =
     movie;
   const defaultImg =
     'https://us.123rf.com/450wm/mathier/mathier1905/mathier190500002/134557216-no-thumbnail-image-placeholder-for-forums-blogs-and-websites.jpg?ver=6';
 
   const releaseYear = parseInt(release_date);
+  const location = useLocation();
 
   return (
     <>
       <div>
-        <img
-          src={
-            poster_path
-              ? `https://image.tmdb.org/t/p/original${poster_path}`
-              : defaultImg
-          }
-          alt={title}
-          width="400"
-        />
-        <h2>
-          {title} ({releaseYear})
-        </h2>
-        <p>User Score: {Math.round(vote_average * 10)}%</p>
-        <b>Overview: </b>
-        <p>{overview}</p>
-        <b>Genres: </b>
-        <p>{genres?.map(genre => genre.name).join(', ')}</p>
+        <MovieCardStyled>
+          <img
+            src={
+              poster_path
+                ? `https://image.tmdb.org/t/p/original${poster_path}`
+                : defaultImg
+            }
+            alt={title}
+            width="400"
+          />
+          <div className="wrapper">
+            <h2>
+              {title} ({releaseYear})
+            </h2>
+            <p>User Score: {Math.round(vote_average * 10)}%</p>
+            <b>Overview: </b>
+            <p>{overview}</p>
+            <b>Genres: </b>
+            <p>{genres?.map(genre => genre.name).join(', ')}</p>
+          </div>
+        </MovieCardStyled>
 
         <div>
-          <h3>Additional information</h3>
-          <ul>
-            <li>
-              <NavLink to="cast">Cast</NavLink>
-            </li>
-            <li>
-              <NavLink to="reviews">Reviews</NavLink>
-            </li>
-          </ul>
+          <AddInfoStyled>
+            <h3>Additional information</h3>
+            <ul>
+              <li>
+                <NavLink state={{ from: location.state?.from }} to="cast">
+                  Cast
+                </NavLink>
+              </li>
+              <li>
+                <NavLink state={{ from: location.state?.from }} to="reviews">
+                  Reviews
+                </NavLink>
+              </li>
+            </ul>
+          </AddInfoStyled>
           <Outlet />
         </div>
       </div>
     </>
   );
 };
+
+export default MovieCard;
