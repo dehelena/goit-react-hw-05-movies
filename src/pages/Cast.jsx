@@ -10,8 +10,8 @@ export const Cast = () => {
   useEffect(() => {
     const fetchCast = async id => {
       try {
-        const { result } = await requestMovieCast(id);
-        setCast(result);
+        const { cast } = await requestMovieCast(id);
+        setCast(cast);
       } catch (error) {
         console.log(error);
       }
@@ -21,7 +21,11 @@ export const Cast = () => {
 
   return (
     <div>
-      <CastList cast={cast} />
+      {cast ? (
+        <CastList cast={cast} />
+      ) : (
+        <p>No info for the cast for this movie</p>
+      )}
     </div>
   );
 };

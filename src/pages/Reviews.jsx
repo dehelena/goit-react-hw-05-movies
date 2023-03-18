@@ -10,8 +10,8 @@ export const Reviews = () => {
   useEffect(() => {
     const fetchMovieReviews = async id => {
       try {
-        const { result } = await requestMovieReviews(id);
-        setReviews(result);
+        const { results } = await requestMovieReviews(id);
+        setReviews(results);
       } catch (error) {
         console.log(error);
       }
@@ -21,7 +21,11 @@ export const Reviews = () => {
 
   return (
     <div>
-      <ReviewsList reviews={reviews} />
+      {reviews ? (
+        <ReviewsList reviews={reviews} />
+      ) : (
+        <p>No reviews for this film</p>
+      )}
     </div>
   );
 };

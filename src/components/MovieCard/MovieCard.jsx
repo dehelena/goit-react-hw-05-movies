@@ -7,6 +7,8 @@ export const MovieCard = ({ movie }) => {
   const defaultImg =
     'https://us.123rf.com/450wm/mathier/mathier1905/mathier190500002/134557216-no-thumbnail-image-placeholder-for-forums-blogs-and-websites.jpg?ver=6';
 
+  const releaseYear = parseInt(release_date);
+
   return (
     <>
       <div>
@@ -17,15 +19,16 @@ export const MovieCard = ({ movie }) => {
               : defaultImg
           }
           alt={title}
+          width="400"
         />
         <h2>
-          {title} ({release_date.slice(0, 4)})
+          {title} ({releaseYear})
         </h2>
-        <span>User Score: {Math.round(vote_average * 10)}%</span>
+        <p>User Score: {Math.round(vote_average * 10)}%</p>
         <b>Overview: </b>
         <p>{overview}</p>
         <b>Genres: </b>
-        <p>{genres.map(genre => genre.name)}</p>
+        <p>{genres?.map(genre => genre.name).join(', ')}</p>
 
         <div>
           <h3>Additional information</h3>

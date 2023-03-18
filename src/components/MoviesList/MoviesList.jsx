@@ -6,15 +6,16 @@ export const MoviesList = ({ movies }) => {
   return (
     <div>
       <ul>
-        {movies.map(({ id, title, name }) => {
-          return (
-            <li key={id}>
-              <Link to={`/movies/${id}`} state={{ from: location }}>
-                {title || name}
-              </Link>
-            </li>
-          );
-        })}
+        {movies !== null &&
+          movies.map(({ id, title, name }) => {
+            return (
+              <li key={id}>
+                <Link to={`/movies/${id}`} state={{ from: location }}>
+                  {title || name}
+                </Link>
+              </li>
+            );
+          })}
       </ul>
     </div>
   );

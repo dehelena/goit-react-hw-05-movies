@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export const Searchbar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
